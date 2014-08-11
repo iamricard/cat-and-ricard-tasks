@@ -3,9 +3,12 @@
   <li><%= project.name %>
     <ul class="tasks">
       <% project.tasks.each do |task| %>
-      <li><%= task.name %></li>
+      <li><%= task.name %> is <%= link_to task.status, edit_project_task_path(project.id, task.id) %></li>
       <% end %>
     </ul>
+    <%= link_to 'Taskmaster!', new_project_task_path(project.id) %>
   </li>
   <% end %>
 </ul>
+
+<%= link_to 'Start an awesome project!', new_project_path %>
