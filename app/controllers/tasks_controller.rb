@@ -14,6 +14,21 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.find(params[:id])
+    if @task.update_attributes task_params
+      redirect_to action: 'index', controller: 'projects'
+    else
+      render 'edit'
+    end
+  end
+
   private
   def task_params
     params.require(:task).permit(:project_id, :name, :status)
